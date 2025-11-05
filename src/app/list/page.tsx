@@ -7,6 +7,7 @@ import { loggedInProtectedPage } from '@/lib/page-protection';
 import authOptions from '@/lib/authOptions';
 import { Contact } from '@/lib/validationSchemas';
 import ContactCard from '@/components/ContactCard';
+import { prisma } from '@/lib/prisma';
 
 /** Render a list of stuff for the logged in user. */
 const ListPage = async () => {
@@ -26,7 +27,7 @@ const ListPage = async () => {
   // });
   // console.log(stuff);
 
-  const owner = session?.user!.email;
+  const owner = session?.user!.email ? session.user.email : '';
   const contacts: Contact[] = await prisma.contact.findMany({
     where: {
       owner,
