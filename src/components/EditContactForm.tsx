@@ -138,4 +138,3 @@ const EditContactForm = ({ contact }: { contact: Contact }) => {
 };
 
 export default EditContactForm;
-
