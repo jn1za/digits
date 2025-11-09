@@ -1,5 +1,6 @@
 ---
 title: Digits
+description: Digits is an app for managing contacts and notes.
 ---
 
 
