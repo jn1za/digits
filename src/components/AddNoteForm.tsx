@@ -12,7 +12,7 @@ import { AddNoteSchema } from '@/lib/validationSchemas';
 import { Contact } from '@prisma/client';
 
 // eslint-disable-next-line max-len
-const onSubmit = async (data: { note: string, contactID: number, owner: string }) => {
+const onSubmit = async (data: { note: string, contactId: number, owner: string }) => {
   // console.log(`onSubmit data: ${JSON.stringify(data, null, 2)}`);
   await addNote(data);
   swal('Success', 'Your note has been added', 'success', {
@@ -42,49 +42,42 @@ const AddNoteForm = ({ contact }: { contact: Contact }) => {
   return (
     <Container className="py-3">
       <Row className="justify-content-center">
-        <Col xs={10}>
-          <Col className="text-center">
-            <h2>Add Note</h2>
-          </Col>
-          <Card>
-            <Card.Header>
-              Add Timestamped Note
-            </Card.Header>
-            <Card.Body>
-              <Form onSubmit={handleSubmit(onSubmit)}>
-                <Row>
+        <Card>
+          <Card.Header>
+            Add Timestamped Note
+          </Card.Header>
+          <Card.Body>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              <Col>
+                <Form.Group>
+                  <Form.Label>Note</Form.Label>
+                  <input
+                    type="text"
+                    {...register('note')}
+                    className={`form-control ${errors.note ? 'is-invalid' : ''}`}
+                  />
+                  <div className="invalid-feedback">{errors.note?.message}</div>
+                </Form.Group>
+              </Col>
+              <input type="hidden" {...register('owner')} value={currentUser} />
+              <input type="hidden" {...register('contactId')} value={contact.id} />
+              <Form.Group className="form-group">
+                <Row className="pt-3">
                   <Col>
-                    <Form.Group>
-                      <Form.Label>Note</Form.Label>
-                      <input
-                        type="text"
-                        {...register('note')}
-                        className={`form-control ${errors.note ? 'is-invalid' : ''}`}
-                      />
-                      <div className="invalid-feedback">{errors.note?.message}</div>
-                    </Form.Group>
+                    <Button type="submit" variant="primary">
+                      Submit
+                    </Button>
+                  </Col>
+                  <Col>
+                    <Button type="button" onClick={() => reset()} variant="warning" className="float-right">
+                      Reset
+                    </Button>
                   </Col>
                 </Row>
-                <input type="hidden" {...register('owner')} value={currentUser} />
-                <input type="hidden" {...register('contactID')} value={contact.id} />
-                <Form.Group className="form-group">
-                  <Row className="pt-3">
-                    <Col>
-                      <Button type="submit" variant="primary">
-                        Submit
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button type="button" onClick={() => reset()} variant="warning" className="float-right">
-                        Reset
-                      </Button>
-                    </Col>
-                  </Row>
-                </Form.Group>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
+              </Form.Group>
+            </Form>
+          </Card.Body>
+        </Card>
       </Row>
     </Container>
   );
