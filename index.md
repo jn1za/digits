@@ -1,3 +1,8 @@
+---
+title: Digits
+---
+
+
 <img src="doc\landing-page.png">
 
 Digits is an application that allows users to:
