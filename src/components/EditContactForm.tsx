@@ -30,7 +30,7 @@ const EditContactForm = ({ contact }: { contact: Contact }) => {
   return (
     <Container className="py-3">
       <Row className="justify-content-center">
-        <Col xs={5}>
+        <Col xs={10}>
           <Col className="text-center">
             <h2>Edit Contact</h2>
           </Col>
