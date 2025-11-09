@@ -1,15 +1,13 @@
 /* eslint-disable operator-linebreak */
 import { getServerSession } from 'next-auth';
 import { Col, Container, Row } from 'react-bootstrap';
-// import { prisma } from '@/lib/prisma';
-// import StuffItem from '@/components/StuffItem';
 import { loggedInProtectedPage } from '@/lib/page-protection';
 import authOptions from '@/lib/authOptions';
 import { Contact } from '@prisma/client';
 import ContactCard from '@/components/ContactCard';
 import { prisma } from '@/lib/prisma';
 
-/** Render a list of stuff for the logged in user. */
+/** Render a list of contact cards for the logged in user. */
 const ListPage = async () => {
   // Protect the page, only logged in users can access it.
   const session = await getServerSession(authOptions);
@@ -19,14 +17,6 @@ const ListPage = async () => {
       // eslint-disable-next-line @typescript-eslint/comma-dangle
     } | null,
   );
-  // const owner = (session && session.user && session.user.email) || '';
-  // const stuff = await prisma.stuff.findMany({
-  //   where: {
-  //     owner,
-  //   },
-  // });
-  // console.log(stuff);
-
   const owner = session?.user?.email || '';
   const contacts: Contact[] = await prisma.contact.findMany({
     where: {

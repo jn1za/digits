@@ -15,6 +15,8 @@ const AdminPage = async () => {
 
   const contacts = await prisma.contact.findMany({});
 
+  const notes = await prisma.note.findMany({});
+
   return (
     <main>
       <Container id="list" fluid className="py-3">
@@ -24,7 +26,7 @@ const AdminPage = async () => {
             <Row xs={1} md={2} lg={3} className="g-4">
               {contacts.map((contact) => (
                 <Col key={contact.firstName + contact.lastName}>
-                  <ContactCardAdmin contact={contact} />
+                  <ContactCardAdmin contact={contact} notes={notes.filter(note => (note.contactId === contact.id))} />
                 </Col>
               ))}
             </Row>
