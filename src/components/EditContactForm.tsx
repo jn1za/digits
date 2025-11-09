@@ -114,20 +114,6 @@ const EditContactForm = ({ contact }: { contact: Contact }) => {
                   </Row>
                   <input type="hidden" {...register('owner')} value={contact.owner} />
                 </Form.Group>
-                <Form.Group className="form-group">
-                  <Row className="pt-3">
-                    <Col>
-                      <Button type="submit" variant="primary">
-                        Submit
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button type="button" onClick={() => reset()} variant="warning" className="float-right">
-                        Reset
-                      </Button>
-                    </Col>
-                  </Row>
-                </Form.Group>
               </Form>
             </Card.Body>
           </Card>
