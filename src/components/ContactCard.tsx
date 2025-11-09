@@ -3,7 +3,7 @@
 import { Card, Image, ListGroup } from 'react-bootstrap';
 import Link from 'next/link';
 import { Contact, Note } from '@prisma/client';
-import NoteItem from './NoteItem';
+import NoteItem from '@/components/NoteItem';
 
 /* Renders a single row in the List Stuff table. See list/page.tsx. */
 const ContactCard = ({ contact, notes }: { contact: Contact, notes: Note[] }) => (
@@ -19,11 +19,11 @@ const ContactCard = ({ contact, notes }: { contact: Contact, notes: Note[] }) =>
     </Card.Header>
     <Card.Body>
       <Card.Text>{contact.description}</Card.Text>
+      <ListGroup variant="flush">
+        {notes.map((note) => <NoteItem key={note.id} note={note} />)}
+      </ListGroup>
     </Card.Body>
     <Card.Footer>
-      <ListGroup variant="flush">
-        {notes.map((note) => <NoteItem key={note.id} note={note}/>)}
-      </ListGroup>
       <Link href={`edit/${contact.id}`}>Edit</Link>
     </Card.Footer>
   </Card>

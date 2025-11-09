@@ -131,3 +131,14 @@ export async function editContact(contact: Contact) {
   });
   redirect('/list');
 }
+
+export async function addNote(note: { note: string; owner: string; contactID: number }) {
+  await prisma.note.create({
+    data: {
+      note: note.note,
+      owner: note.owner,
+      contactId: note.contactID,
+    },
+  });
+  redirect('/list');
+}
